@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">MindShapener</string>
+    <string name="content_description">This is a simple mathematics games which is believed can train your brain. Tow numbers are given randomly based on your level choice together with the operator.\nYou just need to calculates the answer, write your answer and press check button. every correct answer will give you 1 point while wrong answer will deduct 1 point.</string>
+    <string name="point_text">POINT :</string>
+    <string name="check_text">Check</string>
+    <string name="level_i7">i7</string>
+    <string name="level_i5">i5</string>
+    <string name="level_i3">i3</string>
+    <string name="choose_level_text">Choose level:</string>
+    <string name="instructions_text">Instructions:</string>
+    <string name="hint_text">Enter your Answer here</string>
+</resources>
