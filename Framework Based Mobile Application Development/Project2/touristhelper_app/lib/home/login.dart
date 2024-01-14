@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:touristhelper_app/home/user.dart';
@@ -15,45 +17,77 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController usernameController = TextEditingController();
-   TextEditingController repasswordController = TextEditingController();
+  TextEditingController repasswordController = TextEditingController();
 
-  late List<User> _users;
+  List<User> _users = [];
   bool _logState = false;
   String _logTextButton = 'Sign Up';
   String _logText = "Login";
   String _logScript = 'Already have an account ';
+  void login() async {
+    final url = Uri.https(firebaseUrl, "users.json");
+    final response = await http.get(url);
+    try {
+      List<User> myUserList = [];
+      if (response.statusCode == 200) {
+        //  print(response.body);
+        Map<String, dynamic> temp = json.decode(response.body);
+        temp.forEach((key, value) {
+           print(value['username']);
+          myUserList.add(User(
+              userId: key,
+              displayName: value['username'],
+              email: value['email'],
+              password: value['password']));
+        });
+        for(final tempUser in myUserList){
+          if(tempUser.email.toString() == emailController.text.toString()
+          && tempUser.password.toString() == passwordController.text.toString()){
+            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Okay')));
+            Navigator.push(context, MaterialPageRoute(builder: (ctx){
+                return HomePage(user: tempUser);
+            }));
+          }
+        }
+      }
+    } catch (e) {
+      print(e);
+    }
 
-  void signup ()async{ 
+   
+  }
 
+  void signup() async {
     final url = Uri.https(firebaseUrl, "users.json");
 
     final response = await http.post(url,
-          headers: {
-            'Content-Type': 'application/json',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: json.encode(
+          {
+            'username': usernameController.text,
+            'email': emailController.text,
+            'password': passwordController.text,
           },
-          body: json.encode(
-            {
-              'username': usernameController.text,
-              'email': emailController.text,
-              'password': passwordController.text,
+        ));
 
-            },
-          ));
-
-    if(response.statusCode == 200){
+    if (response.statusCode == 200) {
       Map<String, dynamic> userKey = json.decode(response.body);
       User signUpUser = User(
-        userId: userKey['name'], 
-        displayName: usernameController.text, 
-        email: emailController.text, 
-        password: passwordController.text);
+          userId: userKey['name'],
+          displayName: usernameController.text,
+          email: emailController.text,
+          password: passwordController.text);
 
-        Navigator.push(context, MaterialPageRoute(builder: (ctx){
-            return HomePage(user: signUpUser,);
-        }));
+      Navigator.push(context, MaterialPageRoute(builder: (ctx) {
+        return HomePage(
+          user: signUpUser,
+        );
+      }));
     }
-
   }
+
   @override
   void initState() {
     super.initState();
@@ -66,24 +100,21 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text(_logTextButton),
-        
-        
         backgroundColor: Theme.of(context).primaryColorLight,
         foregroundColor: Colors.black,
         centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Container(
-          
           height: MediaQuery.of(context).orientation == Orientation.landscape
               ? MediaQuery.of(context).size.height * 2
               : MediaQuery.of(context).size.height,
-        decoration: BoxDecoration(
-            image: DecorationImage(
-          image: AssetImage('images/tugunegara.jpg'),
-          fit: BoxFit.cover,
-        opacity: 0.6,
-        )),
+          decoration: BoxDecoration(
+              image: DecorationImage(
+            image: AssetImage('images/tugunegara.jpg'),
+            fit: BoxFit.cover,
+            opacity: 0.6,
+          )),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -151,7 +182,6 @@ class _LoginPageState extends State<LoginPage> {
                             decoration:
                                 const InputDecoration(labelText: 'Password'),
                           ),
-                          
                           TextFormField(
                             controller: repasswordController,
                             obscureText: true,
@@ -198,13 +228,15 @@ class _LoginPageState extends State<LoginPage> {
                                 fontSize: 18),
                           ),
                           onPressed: () {
-                            if(_logTextButton == "Sign Up"){
+                            if (_logTextButton == "Sign Up") {
                               signup();
+                            } else {
+                              login();
                             }
                           },
                         ),
                       ),
-                      SizedBox(height :!_logState ? 100 : 50),
+                      SizedBox(height: !_logState ? 100 : 50),
                       TextButton(
                         child: RichText(
                           text: TextSpan(
@@ -231,7 +263,7 @@ class _LoginPageState extends State<LoginPage> {
                             _logScript = (!_logState)
                                 ? 'Already have an account '
                                 : 'Become a member and ';
-                            usernameController.text ="";
+                            usernameController.text = "";
                             repasswordController.text = "";
                           });
                         },

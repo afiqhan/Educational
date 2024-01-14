@@ -23,7 +23,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   void _registerUser() async {
     firstName = _firstNameController.text;
-    lastName = _lastNameController.text;
     _email = _emailController.text;
     _password = _passwordController.text;
 
@@ -58,7 +57,7 @@ class _SignUpPageState extends State<SignUpPage> {
               },
               body: json.encode(
                 {
-                  'username': "$firstName $lastName",
+                  'username': "$firstName",
                   'email': _email,
                   'password': _password,
                 },
@@ -69,11 +68,11 @@ class _SignUpPageState extends State<SignUpPage> {
 
             User user = User(
                 userId: registerUser['name'],
-                displayName: "$firstName $lastName",
+                displayName: "$firstName",
                 email: _email,
                 password: _password);
             print(
-                "#Debug signup_page.dart -> username is '$firstName $lastName' ");
+                "#Debug signup_page.dart -> username is '$firstName'");
             print(
                 "#Debug signup_page.dart -> userid is '${registerUser['name']}' ");
             Navigator.pushAndRemoveUntil(context,
@@ -106,7 +105,6 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   String firstName = '';
-  String lastName = '';
   String _error = '';
   String _password = '';
   String _email = '';
