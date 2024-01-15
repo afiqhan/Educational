@@ -240,6 +240,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.7"
+  kommunicate_flutter:
+    dependency: "direct main"
+    description:
+      name: kommunicate_flutter
+      sha256: "0644c40e814d30e4a4c5960b9ac49ed5e151ba9bcff18a67d87d03d83f72b188"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.8.3"
   libphonenumber_platform_interface:
     dependency: transitive
     description:

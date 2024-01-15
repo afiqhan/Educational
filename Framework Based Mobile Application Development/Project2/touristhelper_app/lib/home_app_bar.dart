@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:touristhelper_app/screens/home_screen.dart';
 import 'package:touristhelper_app/screens/welcome_screen.dart';
 
 class HomeAppBar extends StatefulWidget {
@@ -10,7 +11,18 @@ class _HomeAppBarState extends State<HomeAppBar> {
   TextEditingController _searchCotrfinaoller = TextEditingController();
   List<String> allContainerNames = ["Kuala Lumpur", "Terengganu", "Sarawak", "Kedah", "Johor", "Sabah", "Melaka", "Langkawi", "Pahang"];
   List<String> displayedContainerNames = [];
-
+// List of container descriptions (corresponding to each container name)
+  final List<String> containerDescriptions = [
+    'Description for Kuala Lumpur...',
+    'Description for Terengganu...',
+    'Description for Sarawak...',
+    'Description for Kedah...',
+    'Description for Johor...',
+    'Description for Sabah...',
+    'Description for Melaka...',
+    'Description for Langkawi...',
+    'Description for Pahang...',
+  ];
   @override
   void initState() {
     super.initState();
@@ -139,7 +151,8 @@ class CustomSearchDelegate extends SearchDelegate<String> {
   final List<String> containerNames;
 
   CustomSearchDelegate(this.containerNames);
-
+  
+  get containerDescriptions => 1;
   @override
   List<Widget> buildActions(BuildContext context) {
     return [
@@ -172,7 +185,8 @@ class CustomSearchDelegate extends SearchDelegate<String> {
     return _buildSearchResults();
   }
 
-  Widget _buildSearchResults() {
+
+     Widget _buildSearchResults() {
     final List<String> results = containerNames
         .where((name) => name.toLowerCase().contains(query.toLowerCase()))
         .toList();
@@ -182,7 +196,22 @@ class CustomSearchDelegate extends SearchDelegate<String> {
       itemBuilder: (context, index) {
         return ListTile(
           title: Text(results[index]),
-          // You can add onTap functionality here if needed
+          // Navigate to the detailed screen when a result is tapped
+         onTap: () {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => DetailScreen(
+        imagePath: 'assets/kuala_lumpur_image.jpg', // Replace with the actual image path
+        heroTag: 'kuala_lumpur_hero_tag', // Replace with a unique hero tag
+        names: containerNames,
+        descriptions: containerDescriptions, 
+        index: containerNames.indexOf(results[index]),
+      ),
+    ),
+  );
+},
+
         );
       },
     );

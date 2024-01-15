@@ -7,8 +7,6 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:touristhelper_app/widgets/favourites.dart';
 import 'package:touristhelper_app/widgets/registerplace.dart';
 import 'package:touristhelper_app/widgets/viewlocation.dart';
-import 'package:touristhelper_app/screens/home_screen.dart';
-
 class HomePage extends StatelessWidget {
   final User user;
 
@@ -297,6 +295,7 @@ class _DetailScreenState extends State<DetailScreen> {
                         SizedBox(height: 16),
                         Text(
                           'Fun Fact: This is a fun fact related to ${widget.names[widget.index]}!',
+                          
                           style: TextStyle(
                             fontSize: 18,
                             fontStyle: FontStyle.italic,

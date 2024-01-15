@@ -40,6 +40,7 @@ dependencies:
   http: ^1.1.0
   flutter_native_splash: ^2.3.7
   flutter_rating_bar: ^4.0.1
+  kommunicate_flutter: ^1.8.3
 
 dev_dependencies:
   flutter_test:

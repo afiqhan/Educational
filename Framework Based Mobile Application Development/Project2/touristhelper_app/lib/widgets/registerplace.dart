@@ -5,7 +5,8 @@ class RegisterPlacePage extends StatefulWidget {
   _RegisterPlacePageState createState() => _RegisterPlacePageState();
 }
 
-class _RegisterPlacePageState extends State<RegisterPlacePage> {
+class _RegisterPlacePageState extends State<RegisterPlacePage>
+    with TickerProviderStateMixin {
   // Create an instance of PlaceDatabase
   final PlaceDatabase placeDatabase = PlaceDatabase();
 
@@ -18,6 +19,24 @@ class _RegisterPlacePageState extends State<RegisterPlacePage> {
 
   // Index of the place to be updated
   int? updateIndex;
+
+  late AnimationController _animationController;
+  late Animation<double> _scaleAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _animationController = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 300),
+    );
+    _scaleAnimation = Tween<double>(begin: 1.0, end: 0.9).animate(
+      CurvedAnimation(
+        parent: _animationController,
+        curve: Curves.easeInOut,
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,19 +62,25 @@ class _RegisterPlacePageState extends State<RegisterPlacePage> {
               ),
             ),
             // Button to register a new place
-            ElevatedButton(
-              onPressed: () {
-                // Register a new place
-                String newPlaceName = _placeNameController.text;
-                placeDatabase.registerPlace(newPlaceName);
+            ScaleTransition(
+              scale: _scaleAnimation,
+              child: ElevatedButton(
+                onPressed: () {
+                  // Register a new place
+                  String newPlaceName = _placeNameController.text;
+                  placeDatabase.registerPlace(newPlaceName);
 
-                // Clear the text field
-                _placeNameController.clear();
+                  // Clear the text field
+                  _placeNameController.clear();
 
-                // Update the UI to reflect the new registered places
-                setState(() {});
-              },
-              child: Text('Register Now'),
+                  // Update the UI to reflect the new registered places
+                  setState(() {});
+                },
+                child: Text('Register Now'),
+                style: ElevatedButton.styleFrom(
+                  padding: EdgeInsets.all(16.0),
+                ),
+              ),
             ),
             // Display the list of registered places
             registeredPlaces.isEmpty
@@ -79,14 +104,17 @@ class _RegisterPlacePageState extends State<RegisterPlacePage> {
                                     _updatePlaceNameController.text =
                                         registeredPlaces[index];
                                   });
+
+                                  // Show the update place name dialog
+                                  _showUpdateDialog();
                                 },
                               ),
                               IconButton(
                                 icon: Icon(Icons.delete),
                                 onPressed: () {
                                   // Delete the place
-                                  placeDatabase.unregisterPlace(
-                                      registeredPlaces[index]);
+                                  placeDatabase
+                                      .unregisterPlace(registeredPlaces[index]);
 
                                   // Update the UI to reflect the changes
                                   setState(() {});
@@ -98,41 +126,56 @@ class _RegisterPlacePageState extends State<RegisterPlacePage> {
                       },
                     ),
                   ),
-            // Text field for updating a place name
-            if (updateIndex != null)
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    TextField(
-                      controller: _updatePlaceNameController,
-                      decoration: InputDecoration(
-                        hintText: 'Enter updated place name',
-                      ),
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        // Update the place name
-                        String updatedPlaceName =
-                            _updatePlaceNameController.text;
-                        placeDatabase.updatePlaceName(
-                            registeredPlaces[updateIndex!], updatedPlaceName);
-
-                        // Clear the text field and reset the updateIndex
-                        _updatePlaceNameController.clear();
-                        setState(() {
-                          updateIndex = null;
-                        });
-                      },
-                      child: Text('Update Place Name'),
-                    ),
-                  ],
-                ),
-              ),
           ],
         ),
       ),
+      backgroundColor: const Color.fromARGB(255, 114, 123, 177),
     );
+  }
+
+  // Function to show the update place name dialog
+  Future<void> _showUpdateDialog() async {
+    return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Update Place Name'),
+          content: TextField(
+            controller: _updatePlaceNameController,
+            decoration: InputDecoration(
+              hintText: 'Enter updated place name',
+            ),
+          ),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                // Update the place name
+                String updatedPlaceName = _updatePlaceNameController.text;
+                placeDatabase.updatePlaceName(
+                    placeDatabase.getAllRegisteredPlaces()[updateIndex!],
+                    updatedPlaceName);
+
+                // Clear the text field and reset the updateIndex
+                _updatePlaceNameController.clear();
+                setState(() {
+                  updateIndex = null;
+                });
+
+                // Close the dialog
+                Navigator.of(context).pop();
+              },
+              child: Text('Update'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose();
+    super.dispose();
   }
 }
 
