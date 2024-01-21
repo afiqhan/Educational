@@ -17,6 +17,9 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Tourist Helper App',
       home: WelcomeScreen(),
+      theme: ThemeData(
+        useMaterial3: false
+      ),
     );
   }
 }

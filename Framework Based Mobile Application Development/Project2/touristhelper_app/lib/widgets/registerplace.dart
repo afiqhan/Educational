@@ -1,4 +1,9 @@
+
+
 import 'package:flutter/material.dart';
+import 'package:touristhelper_app/home/user.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class RegisterPlacePage extends StatefulWidget {
   @override
@@ -9,6 +14,8 @@ class _RegisterPlacePageState extends State<RegisterPlacePage>
     with TickerProviderStateMixin {
   // Create an instance of PlaceDatabase
   final PlaceDatabase placeDatabase = PlaceDatabase();
+
+  List<dynamic> myList =[];
 
   // Controller for the text field
   final TextEditingController _placeNameController = TextEditingController();
@@ -22,10 +29,33 @@ class _RegisterPlacePageState extends State<RegisterPlacePage>
 
   late AnimationController _animationController;
   late Animation<double> _scaleAnimation;
+ void getRegisterPlace()async{
+    final url = Uri.https(firebaseUrl, "registerPlaces.json");
 
+
+    try{
+final response = await http.get(url);
+        if(response.statusCode == 200){
+          Map<String, dynamic> data = json.decode(response.body);
+          print(data);
+          List<dynamic> tempList = [];
+          data.entries.forEach((element) {
+             tempList.add(element.value["placeName"]);
+          });
+
+          setState(() {
+            myList = tempList;
+          });
+        }
+    }catch(error){
+      print("error $error");
+    }
+  }  
+  
   @override
   void initState() {
     super.initState();
+    getRegisterPlace();
     _animationController = AnimationController(
       vsync: this,
       duration: Duration(milliseconds: 300),
@@ -33,8 +63,8 @@ class _RegisterPlacePageState extends State<RegisterPlacePage>
     _scaleAnimation = Tween<double>(begin: 1.0, end: 0.9).animate(
       CurvedAnimation(
         parent: _animationController,
-        curve: Curves.easeInOut,
-      ),
+        curve: Curves.easeInOut, 
+      ), 
     );
   }
 
@@ -83,14 +113,14 @@ class _RegisterPlacePageState extends State<RegisterPlacePage>
               ),
             ),
             // Display the list of registered places
-            registeredPlaces.isEmpty
+            myList.isEmpty
                 ? Text('No places registered yet.')
                 : Expanded(
                     child: ListView.builder(
-                      itemCount: registeredPlaces.length,
+                      itemCount: myList.length,
                       itemBuilder: (context, index) {
                         return ListTile(
-                          title: Text(registeredPlaces[index]),
+                          title: Text(myList[index]),
                           // You can customize the ListTile as needed
                           trailing: Row(
                             mainAxisSize: MainAxisSize.min,
@@ -102,7 +132,7 @@ class _RegisterPlacePageState extends State<RegisterPlacePage>
                                   setState(() {
                                     updateIndex = index;
                                     _updatePlaceNameController.text =
-                                        registeredPlaces[index];
+                                        myList[index];
                                   });
 
                                   // Show the update place name dialog

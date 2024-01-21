@@ -1,9 +1,8 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:touristhelper_app/home/user.dart';
 import 'package:touristhelper_app/screens/home_screen.dart';
+
 import 'dart:convert';
 
 class LoginPage extends StatefulWidget {
@@ -20,6 +19,8 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController repasswordController = TextEditingController();
 
   List<User> _users = [];
+
+  final _formKey = GlobalKey<FormState>();
   bool _logState = false;
   String _logTextButton = 'Sign Up';
   String _logText = "Login";
@@ -33,58 +34,64 @@ class _LoginPageState extends State<LoginPage> {
         //  print(response.body);
         Map<String, dynamic> temp = json.decode(response.body);
         temp.forEach((key, value) {
-           print(value['username']);
+          print(value['username']);
           myUserList.add(User(
               userId: key,
               displayName: value['username'],
               email: value['email'],
               password: value['password']));
         });
-        for(final tempUser in myUserList){
-          if(tempUser.email.toString() == emailController.text.toString()
-          && tempUser.password.toString() == passwordController.text.toString()){
-            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Okay')));
-            Navigator.push(context, MaterialPageRoute(builder: (ctx){
-                return HomePage(user: tempUser);
+        for (final tempUser in myUserList) {
+          if (tempUser.email.toString() == emailController.text.toString() &&
+              tempUser.password.toString() ==
+                  passwordController.text.toString()) {
+            ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('Successfully Logged in')));
+            Navigator.push(context, MaterialPageRoute(builder: (ctx) {
+              return HomePage(user: tempUser);
             }));
+            return;
           }
         }
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text("Invalid username or password")));
       }
     } catch (e) {
       print(e);
     }
-
-   
   }
 
   void signup() async {
-    final url = Uri.https(firebaseUrl, "users.json");
+    if (_formKey.currentState!.validate()) {
+      final url = Uri.https(firebaseUrl, "users.json");
 
-    final response = await http.post(url,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: json.encode(
-          {
-            'username': usernameController.text,
-            'email': emailController.text,
-            'password': passwordController.text,
+      final response = await http.post(url,
+          headers: {
+            'Content-Type': 'application/json',
           },
-        ));
+          body: json.encode(
+            {
+              'username': usernameController.text,
+              'email': emailController.text,
+              'password': passwordController.text,
+            },
+          ));
 
-    if (response.statusCode == 200) {
-      Map<String, dynamic> userKey = json.decode(response.body);
-      User signUpUser = User(
-          userId: userKey['name'],
-          displayName: usernameController.text,
-          email: emailController.text,
-          password: passwordController.text);
+      if (response.statusCode == 200) {
+        Map<String, dynamic> userKey = json.decode(response.body);
+        User signUpUser = User(
+            userId: userKey['name'],
+            displayName: usernameController.text,
+            email: emailController.text,
+            password: passwordController.text);
 
-      Navigator.push(context, MaterialPageRoute(builder: (ctx) {
-        return HomePage(
-          user: signUpUser,
-        );
-      }));
+        Navigator.push(context, MaterialPageRoute(builder: (ctx) {
+          return HomePage(
+            user: signUpUser,
+          );
+        }));
+      }
     }
   }
 
@@ -120,81 +127,84 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 50, 20, 40),
-                child: Column(
-                  children: _logState
-                      ? [
-                          TextFormField(
-                            controller: emailController,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter Email';
-                              }
-                              return null;
-                            },
-                            decoration:
-                                const InputDecoration(labelText: 'Email'),
-                          ),
-                          TextFormField(
-                            controller: passwordController,
-                            obscureText: true,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter Password';
-                              }
-                              return null;
-                            },
-                            decoration:
-                                const InputDecoration(labelText: 'Password'),
-                          )
-                        ]
-                      : [
-                          TextFormField(
-                            controller: emailController,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter Email';
-                              }
-                              return null;
-                            },
-                            decoration:
-                                const InputDecoration(labelText: 'Email'),
-                          ),
-                          TextFormField(
-                            controller: usernameController,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter Username';
-                              }
-                              return null;
-                            },
-                            decoration:
-                                const InputDecoration(labelText: 'Username'),
-                          ),
-                          TextFormField(
-                            controller: passwordController,
-                            obscureText: true,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter Password';
-                              }
-                              return null;
-                            },
-                            decoration:
-                                const InputDecoration(labelText: 'Password'),
-                          ),
-                          TextFormField(
-                            controller: repasswordController,
-                            obscureText: true,
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return 'Please enter Repassword';
-                              }
-                              return null;
-                            },
-                            decoration:
-                                const InputDecoration(labelText: 'Phone No'),
-                          )
-                        ],
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: _logState
+                        ? [
+                            TextFormField(
+                              controller: emailController,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter Email';
+                                }
+                                return null;
+                              },
+                              decoration:
+                                  const InputDecoration(labelText: 'Email'),
+                            ),
+                            TextFormField(
+                              controller: passwordController,
+                              obscureText: true,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter Password';
+                                }
+                                return null;
+                              },
+                              decoration:
+                                  const InputDecoration(labelText: 'Password'),
+                            )
+                          ]
+                        : [
+                            TextFormField(
+                              controller: emailController,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter Email';
+                                }
+                                return null;
+                              },
+                              decoration:
+                                  const InputDecoration(labelText: 'Email'),
+                            ),
+                            TextFormField(
+                              controller: usernameController,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter Username';
+                                }
+                                return null;
+                              },
+                              decoration:
+                                  const InputDecoration(labelText: 'Username'),
+                            ),
+                            TextFormField(
+                              controller: passwordController,
+                              obscureText: true,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter Password';
+                                }
+                                return null;
+                              },
+                              decoration:
+                                  const InputDecoration(labelText: 'Password'),
+                            ),
+                            TextFormField(
+                              controller: repasswordController,
+                              obscureText: true,
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter Repassword';
+                                }
+                                return null;
+                              },
+                              decoration: const InputDecoration(
+                                  labelText: 'Confirm password:'),
+                            )
+                          ],
+                  ),
                 ),
               ),
               SizedBox(height: !_logState ? 50 : 110),

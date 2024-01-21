@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:touristhelper_app/home/login.dart';
 
-
 class WelcomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -76,23 +75,3 @@ class WelcomeScreen extends StatelessWidget {
     );
   }
 }
-
-            // GestureDetector(
-            //   onTap: (){
-            //     Navigator.push(context, MaterialPageRoute(
-            //       builder: (context) => HomePage(),
-            //     ));
-            //   },
-            //   child: Container(
-            //     padding: EdgeInsets.all(16),
-            //     decoration: BoxDecoration(
-            //       borderRadius: BorderRadius.circular(20),
-            //       color: Colors.green
-            //     ),
-            //     child: Text(
-            //     "Get Started !",
-            //     style: TextStyle(
-            //       color: Colors.black, fontSize: 16, 
-            //     ),
-            //   ),
-            //   ),

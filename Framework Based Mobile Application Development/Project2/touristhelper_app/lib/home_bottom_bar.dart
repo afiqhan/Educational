@@ -1,11 +1,16 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:touristhelper_app/home/user.dart';
+import 'package:touristhelper_app/widgets/Q&A.dart';
 import 'package:touristhelper_app/widgets/favourites.dart';
 import 'package:touristhelper_app/widgets/person.dart';
-import 'package:touristhelper_app/widgets/Q&A.dart';
+import 'package:touristhelper_app/widgets/registerplace.dart';
 
 
 class HomeBottomBar extends StatelessWidget {
+  final User user;
+
+  const HomeBottomBar({super.key, required this.user});
   @override
   Widget build(BuildContext context) {
     return CurvedNavigationBar(
@@ -28,7 +33,7 @@ class HomeBottomBar extends StatelessWidget {
             Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => PersonPage(), //when click this get started it will go to the sign up
+                            builder: (context) => PersonPage(user: user,), //when click this get started it will go to the sign up
                           ));
             break;
 
@@ -36,7 +41,7 @@ class HomeBottomBar extends StatelessWidget {
             // Navigate to the LocationPage
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => FavoritesPage(favoritedLocations: [],)),
+              MaterialPageRoute(builder: (context) => FavoritesPage(user:  user,)),
             );
             break;
 
@@ -46,6 +51,13 @@ class HomeBottomBar extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => TouristQAPage()),
+            );
+            break;
+            case 4: // Index for the "location_city_outlined" button
+            // Navigate to the LocationPage
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => RegisterPlacePage()),
             );
             break;
           // Handle other cases if needed

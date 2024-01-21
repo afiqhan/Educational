@@ -1,12 +1,14 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:touristhelper_app/home/user.dart';
 import 'package:touristhelper_app/home_app_bar.dart';
 import 'package:touristhelper_app/home_bottom_bar.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:touristhelper_app/widgets/favourites.dart';
 import 'package:touristhelper_app/widgets/registerplace.dart';
 import 'package:touristhelper_app/widgets/viewlocation.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+
 class HomePage extends StatelessWidget {
   final User user;
 
@@ -22,15 +24,15 @@ class HomePage extends StatelessWidget {
     'Langkawi',
     'Pahang'
   ];
-
+ 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(90.0),
-        child: HomeAppBar(),
+        child: HomeAppBar(user: user,),
       ),
-      bottomNavigationBar: HomeBottomBar(),
+      bottomNavigationBar: HomeBottomBar(user: user,),
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
@@ -52,6 +54,7 @@ class HomePage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => DetailScreen(
+                      user:  user,
                       imagePath: imagePath2,
 
                       heroTag: heroTag,
@@ -124,6 +127,7 @@ void navigateToRegisterPlacePage(BuildContext context) {
 }
 
 class DetailScreen extends StatefulWidget {
+  final User user;
   final String imagePath;
   final String heroTag;
   final List<String> names;
@@ -132,6 +136,7 @@ class DetailScreen extends StatefulWidget {
 
   const DetailScreen({
     Key? key,
+    required this.user,
     required this.imagePath,
     required this.heroTag,
     required this.names,
@@ -150,7 +155,46 @@ class _DetailScreenState extends State<DetailScreen> {
   bool showFunFact = false;
   bool isFavorited =
       false; // New variable to track whether the location is favorited
+  
+  void addToFav(String placeName)async{
+    final url = Uri.https(firebaseUrl, "fav.json");
 
+
+    try{
+    final response = await http.post(url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: json.encode(
+          {
+            'placeName': placeName,
+          },
+        ));
+        if(response.statusCode == 200){
+          print("Place is registered"); 
+        }
+    }catch(error){
+      print("error $error");
+    }
+  }    
+ void registerPlace(String placeName)async{
+    final url = Uri.https(firebaseUrl, "registerPlaces.json");
+
+
+    final response = await http.post(url,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: json.encode(
+          {
+            'placeName': placeName,
+          },
+        ));
+        if(response.statusCode == 200){
+          print("Place is registered"); 
+        }
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -194,6 +238,8 @@ class _DetailScreenState extends State<DetailScreen> {
                       actions: [
                         TextButton(
                           onPressed: () {
+                            // go back here\
+                            registerPlace(widget.names[widget.index]);
                             Navigator.pop(context); // Close the dialog
                           },
                           child: Text("OK"),
@@ -317,7 +363,8 @@ class _DetailScreenState extends State<DetailScreen> {
                           setState(() {
                             isFavorited = !isFavorited;
                           });
-
+                          // i want to come here
+                          addToFav(widget.names[widget.index]);
                           // TODO: Add/remove the current location to/from favorites list
                         },
                       ),
@@ -329,7 +376,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => FavoritesPage(
-                                  favoritedLocations: [],
+                                    user: widget.user,
                                 ),
                               ),
                             );

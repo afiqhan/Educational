@@ -16,4 +16,5 @@ class User {
   // - Method to update user details
 }
 
-String firebaseUrl  = "tourist-597fd-default-rtdb.asia-southeast1.firebasedatabase.app";
+String firebaseUrl =
+    "tourist-597fd-default-rtdb.asia-southeast1.firebasedatabase.app";

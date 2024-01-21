@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:touristhelper_app/home/user.dart';
 import 'package:touristhelper_app/screens/home_screen.dart';
 import 'package:touristhelper_app/themes/app_theme.dart';
+
+
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
 
