@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">MMS Challenge</string>
+    <string name="choose_picture_and_send">Choose Picture and Send</string>
+    <string name="failure_permission">Failure to obtain permission!</string>
+    <string name="permission_not_granted">PERMISSION NOT GRANTED!</string>
+    <string name="picture_chosen">Picture is chosen.</string>
+    <string name="button_disabled">Choosing a picture disabled</string>
+    <string name="intro_text">Choose a picture from the Gallery to send:</string>
+</resources>
