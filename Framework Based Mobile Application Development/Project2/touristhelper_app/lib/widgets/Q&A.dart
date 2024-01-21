@@ -34,115 +34,93 @@ class _TouristQAPageState extends State<TouristQAPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
-      appBar: AppBar(
-        title: Text('Q&A Page'),
-        backgroundColor: Color.fromARGB(255, 84, 41, 201),
-      ),
-      
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        
-        
-        child: Column(
-          
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Text(
-              'Question:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+        appBar: AppBar(
+          title: Text('Q&A Page'),
+        ),
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('images/user.jpg'),
+              fit: BoxFit.cover,
             ),
-            
-            SizedBox(height: 8),
-            Text(getQuestion(), style: TextStyle(fontSize: 16)),
-            SizedBox(height: 16),
-            TextField(
-              
-              controller: answerController,
-              decoration: InputDecoration(
-                labelText: 'Your Answer',
-              ),
-            ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                // Validate and add the Q&A to the list
-                if (answerController.text.isNotEmpty) {
-                  setState(() {
-                    qaList.add({
-                      'question': currentQuestion,
-                      'answer': answerController.text,
-                    });
-                    // Clear the text field
-                    answerController.clear();
-                  });
-                } else {
-                  // Show an error message
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text('Error'),
-                        content: Text('Please fill out the answer.'),
-                        actions: [
-                          TextButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            child: Text('OK'),
-                          ),
-                        ],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Text(
+                  'Question:',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                TextField(
+                  controller: answerController,
+                  decoration: InputDecoration(
+                    labelText: 'Your Answer',
+                  ),
+                ),
+                SizedBox(height: 16),
+                ElevatedButton(
+                  onPressed: () {
+                    // Validate and add the Q&A to the list
+                    if (answerController.text.isNotEmpty) {
+                      setState(() {
+                        qaList.add({
+                          'question': currentQuestion,
+                          'answer': answerController.text,
+                        });
+                        // Clear the text field
+                        answerController.clear();
+                      });
+                    } else {
+                      // Show an error message
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text('Error'),
+                            content: Text('Please fill out the answer.'),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                },
+                                child: Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    }
+                  },
+                  child: Text('Submit Answer'),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Your Q&A List:',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: qaList.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text('Q: ${qaList[index]['question']}'),
+                        subtitle: Text('A: ${qaList[index]['answer']}'),
                       );
                     },
-                  );
-                }
-              },
-              child: Text('Submit Answer'),
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 16),
-            Text(
-              'Your Q&A List:',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: qaList.length,
-                itemBuilder: (context, index) {
-                  return ListTile(
-                    title: Text('Q: ${qaList[index]['question']}'),
-                    subtitle: Text('A: ${qaList[index]['answer']}'),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-      backgroundColor:Color.fromARGB(255, 43, 112, 133),
-       );
+          ),
+        ));
   }
 }
 
-void main() {
-  runApp(MaterialApp(
-    home: TouristQAPage(),
-  ));
-}
-
- @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-   
- body: Container(
-      decoration: BoxDecoration(
-        image: DecorationImage(
-          image: AssetImage('images/corak.jpg'), // Change the path to your image file
-          fit: BoxFit.cover,
-        ),
-      ),));}

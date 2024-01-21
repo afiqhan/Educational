@@ -24,15 +24,19 @@ class HomePage extends StatelessWidget {
     'Langkawi',
     'Pahang'
   ];
- 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(90.0),
-        child: HomeAppBar(user: user,),
+        child: HomeAppBar(
+          user: user,
+        ),
       ),
-      bottomNavigationBar: HomeBottomBar(user: user,),
+      bottomNavigationBar: HomeBottomBar(
+        user: user,
+      ),
       body: GridView.builder(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3,
@@ -41,7 +45,7 @@ class HomePage extends StatelessWidget {
         ),
         itemCount: 9,
         itemBuilder: (BuildContext context, int index) {
-          // Use a unique identifier as the Hero tag, in this case, the image path
+          //  unique identifier as the Hero tag, in this case, the image path
           String imagePath = 'images/city${index + 1}.jpg';
           String imagePath2 = 'images/city${index + 10}.jpg';
           String heroTag = 'cityImage$index';
@@ -54,7 +58,7 @@ class HomePage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => DetailScreen(
-                      user:  user,
+                      user: user,
                       imagePath: imagePath2,
 
                       heroTag: heroTag,
@@ -97,7 +101,6 @@ class HomePage extends StatelessWidget {
                       fit: BoxFit.cover,
                     ),
                   ),
-                  
                   child: Container(
                     padding: EdgeInsets.symmetric(vertical: 8),
                     child: Text(
@@ -117,11 +120,13 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
 void navigateToRegisterPlacePage(BuildContext context) {
   Navigator.push(
     context,
     MaterialPageRoute(
-      builder: (context) => RegisterPlacePage(), // Replace with the actual route for the register place page
+      builder: (context) =>
+          RegisterPlacePage(), // Replace with the actual route for the register place page
     ),
   );
 }
@@ -151,35 +156,34 @@ class DetailScreen extends StatefulWidget {
 class _DetailScreenState extends State<DetailScreen> {
   final PlaceDatabase placeDatabase = PlaceDatabase();
 
-  double rating = 4; // You can replace this with the actual rating value
+  double rating = 4; // can replace this with the actual rating value
   bool showFunFact = false;
   bool isFavorited =
       false; // New variable to track whether the location is favorited
-  
-  void addToFav(String placeName)async{
+
+  void addToFav(String placeName) async {
     final url = Uri.https(firebaseUrl, "fav.json");
 
-
-    try{
-    final response = await http.post(url,
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: json.encode(
-          {
-            'placeName': placeName,
+    try {
+      final response = await http.post(url,
+          headers: {
+            'Content-Type': 'application/json',
           },
-        ));
-        if(response.statusCode == 200){
-          print("Place is registered"); 
-        }
-    }catch(error){
+          body: json.encode(
+            {
+              'placeName': placeName,
+            },
+          ));
+      if (response.statusCode == 200) {
+        print("Place is registered");
+      }
+    } catch (error) {
       print("error $error");
     }
-  }    
- void registerPlace(String placeName)async{
-    final url = Uri.https(firebaseUrl, "registerPlaces.json");
+  }
 
+  void registerPlace(String placeName) async {
+    final url = Uri.https(firebaseUrl, "registerPlaces.json");
 
     final response = await http.post(url,
         headers: {
@@ -190,11 +194,11 @@ class _DetailScreenState extends State<DetailScreen> {
             'placeName': placeName,
           },
         ));
-        if(response.statusCode == 200){
-          print("Place is registered"); 
-        }
-
+    if (response.statusCode == 200) {
+      print("Place is registered");
+    }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -223,7 +227,7 @@ class _DetailScreenState extends State<DetailScreen> {
                 ),
               ),
             ),
-             ElevatedButton(
+            ElevatedButton(
               onPressed: () {
                 // Navigate to the register place page
                 navigateToRegisterPlacePage(context);
@@ -234,7 +238,8 @@ class _DetailScreenState extends State<DetailScreen> {
                   builder: (BuildContext context) {
                     return AlertDialog(
                       title: Text("Place Registered"),
-                      content: Text("${widget.names[widget.index]} has been registered."),
+                      content: Text(
+                          "${widget.names[widget.index]} has been registered."),
                       actions: [
                         TextButton(
                           onPressed: () {
@@ -341,7 +346,6 @@ class _DetailScreenState extends State<DetailScreen> {
                         SizedBox(height: 16),
                         Text(
                           'Fun Fact: This is a fun fact related to ${widget.names[widget.index]}!',
-                          
                           style: TextStyle(
                             fontSize: 18,
                             fontStyle: FontStyle.italic,
@@ -376,7 +380,7 @@ class _DetailScreenState extends State<DetailScreen> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => FavoritesPage(
-                                    user: widget.user,
+                                  user: widget.user,
                                 ),
                               ),
                             );

@@ -53,12 +53,15 @@ class _PersonPageState extends State<PersonPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Person Page'),
+        title: Text('User Profile'),
       ),
       bottomNavigationBar: HomeBottomBar(
         user: widget.user,
       ),
-      backgroundColor: Colors.indigo[400],
+
+      
+
+      backgroundColor: Color.fromARGB(255, 140, 140, 226),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -107,7 +110,7 @@ class _PersonPageState extends State<PersonPage> {
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'Here you can add your person-related content.',
+                  'Tourist Helper App',
                   textAlign: TextAlign.center,
                 ),
                 SizedBox(

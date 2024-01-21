@@ -10,6 +10,7 @@ class RegisterPlacePage extends StatefulWidget {
   _RegisterPlacePageState createState() => _RegisterPlacePageState();
 }
 
+
 class _RegisterPlacePageState extends State<RegisterPlacePage>
     with TickerProviderStateMixin {
   // Create an instance of PlaceDatabase
@@ -77,11 +78,19 @@ final response = await http.get(url);
       appBar: AppBar(
         title: Text('Registered Places'),
       ),
-      body: Center(
-        child: Column(
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/user.jpg'), 
+            fit: BoxFit.cover,
+          ),
+       ), 
+      child : Center(
+        child : Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Text field for entering a new place name
+            
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: TextField(
@@ -158,7 +167,7 @@ final response = await http.get(url);
                   ),
           ],
         ),
-      ),
+      ),),
       backgroundColor: const Color.fromARGB(255, 114, 123, 177),
     );
   }

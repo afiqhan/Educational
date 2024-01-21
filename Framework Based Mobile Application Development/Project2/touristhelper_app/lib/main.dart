@@ -1,5 +1,9 @@
+//author : Afiq Hanif (S62993)
+
 import 'package:flutter/material.dart';
+import 'package:touristhelper_app/screens/home_screen.dart';
 import 'package:touristhelper_app/screens/welcome_screen.dart';
+import 'package:touristhelper_app/widgets/person.dart';
 
 void main() {
   runApp(MyApp());
