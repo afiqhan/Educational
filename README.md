@@ -1,6 +1,9 @@
 
 <h1 align="center">Semester 5</h1>
-<h2 align="center">my journey as a student at the university</h2>
+<div align="center" dir="auto">
+<a href=""><img src="https://readme-typing-svg.demolab.com?font=&weight=900&size=27&duration=3000&pause=1000&background=FF373700&center=true&vCenter=true&random=false&width=435&lines=My+journey+as+a+student+at+the+umiversity" alt="Typing SVG" /></a>
+</div>
+
 
 </div>
 <picture>
