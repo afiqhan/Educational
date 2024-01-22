@@ -1,7 +1,7 @@
 
 <h1 align="center">Semester 5</h1>
 <div align="center" dir="auto">
-<a href=""><img src="https://readme-typing-svg.demolab.com?font=&weight=900&size=27&duration=3000&pause=1000&background=FF373700&center=true&vCenter=true&random=false&width=435&lines=My+journey+as+a+student+at+the+umiversity" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Code&weight=200&size=25&pause=1000&color=14FF00DF&background=FF6F7F00&repeat=false&random=false&width=435&lines=My+journey+as+a+student+at+the+university" alt="Typing SVG" /></a>
 </div>
 
 
