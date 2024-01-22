@@ -1,10 +1,7 @@
 # Educational
-Semester 5
-<div align="center">
-  <a href="" >
-   <img src="[![Discord Presence](https://lanyard.cnrad.dev/api/Orange)](https://discord.com/users/Orange)"  />
-  </a>
-  
+<h1 align="center">Semester 5</h1>
+
+
 </div>
 <picture>
   <source
