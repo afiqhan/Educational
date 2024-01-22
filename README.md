@@ -1,6 +1,6 @@
-# Educational
-<h1 align="center">Semester 5</h1>
 
+<h1 align="center">Semester 5</h1>
+<h2 align="center">My journey at the university</h2>
 
 </div>
 <picture>
