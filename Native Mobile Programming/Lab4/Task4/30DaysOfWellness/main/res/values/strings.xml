@@ -1,0 +1,81 @@
+<!--
+  ~ Copyright (C) 2023 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     https://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+<resources>
+    <string name="app_name">WellnessAffirmations</string>
+    <string name="affirmation1">I am strong.</string>
+    <string name="affirmation2">I believe in myself.</string>
+    <string name="affirmation3">Each day is a new opportunity to grow and be a better version of myself.</string>
+    <string name="affirmation4">Every challenge in my life is an opportunity to learn from.</string>
+    <string name="affirmation5">I have so much to be grateful for.</string>
+    <string name="affirmation6">Good things are always coming into my life.</string>
+    <string name="affirmation7">New opportunities await me at every turn.</string>
+    <string name="affirmation8">I have the courage to follow my heart.</string>
+    <string name="affirmation9">Things will unfold at precisely the right time.</string>
+    <string name="affirmation10">I will be present in all the moments that this day brings.</string>
+<!--    <string name="affirmation11">I am deserving of love and joy.</string>-->
+<!--    <string name="affirmation12">I radiate positivity and attract good things into my life.</string>-->
+<!--    <string name="affirmation13">I am in control of my thoughts and emotions.</string>-->
+<!--    <string name="affirmation14">I am open to new experiences and embrace change with enthusiasm.</string>-->
+<!--    <string name="affirmation15">I am worthy of success and accomplishment.</string>-->
+<!--    <string name="affirmation16">My body is healthy, and my mind is sharp.</string>-->
+<!--    <string name="affirmation17">I choose happiness and abundance in every aspect of my life.</string>-->
+<!--    <string name="affirmation18">I am resilient and can overcome any obstacle.</string>-->
+<!--    <string name="affirmation19">My life is full of purpose and meaning.</string>-->
+<!--    <string name="affirmation20">I am surrounded by love and positive energy.</string>-->
+<!--    <string name="affirmation21">I trust the journey of life and know that everything happens for a reason.</string>-->
+<!--    <string name="affirmation22">I am constantly evolving and improving.</string>-->
+<!--    <string name="affirmation23">I am a beacon of light, and my positivity inspires others.</string>-->
+<!--    <string name="affirmation24">I release all negativity and embrace peace and harmony.</string>-->
+<!--    <string name="affirmation25">I am a magnet for success and good fortune.</string>-->
+<!--    <string name="affirmation26">I am capable of achieving my goals and dreams.</string>-->
+<!--    <string name="affirmation27">I am confident, competent, and capable.</string>-->
+<!--    <string name="affirmation28">I radiate confidence, self-respect, and inner harmony.</string>-->
+<!--    <string name="affirmation29">I am a powerhouse; I am indestructible.</string>-->
+<!--    <string name="affirmation30">I am at peace with all that has happened, is happening, and will happen.</string>-->
+
+    <!-- Descriptions for Affirmations -->
+    <string name="affirmation1_description">I am embracing my inner strength and resilience.</string>
+    <string name="affirmation2_description">Believing in myself opens the door to endless possibilities.</string>
+    <string name="affirmation3_description">Each new day is an opportunity for personal growth and positive transformation.</string>
+    <string name="affirmation4_description">Challenges are stepping stones to wisdom, and I learn from every experience.</string>
+    <string name="affirmation5_description">Gratitude fills my heart, and I appreciate the abundance in my life.</string>
+    <string name="affirmation6_description">I attract positivity and goodness into my life with an open heart.</string>
+    <string name="affirmation7_description">Opportunities for success and joy are around every corner.</string>
+    <string name="affirmation8_description">Following my heart with courage leads me to fulfilling and meaningful experiences.</string>
+    <string name="affirmation9_description">I trust in the divine timing of my life\'s unfolding journey.</string>
+    <string name="affirmation10_description">Being present in each moment enriches the tapestry of my life.</string>
+<!--    <string name="affirmation11_description">Love and joy are my birthright, and I am deserving of both.</string>-->
+<!--    <string name="affirmation12_description">My positive energy attracts good things and positive people into my life.</string>-->
+<!--    <string name="affirmation13_description">I am in control of my thoughts, and I choose positivity and peace.</string>-->
+<!--    <string name="affirmation14_description">Change is an opportunity for growth, and I embrace it with enthusiasm.</string>-->
+<!--    <string name="affirmation15_description">Success and accomplishment are natural outcomes of my efforts and abilities.</string>-->
+<!--    <string name="affirmation16_description">My body is a temple of health, and my mind is a source of clarity.</string>-->
+<!--    <string name="affirmation17_description">Choosing happiness and abundance in every area of my life is my birthright.</string>-->
+<!--    <string name="affirmation18_description">I am resilient, and I overcome challenges with grace and strength.</string>-->
+<!--    <string name="affirmation19_description">My life has purpose and meaning, and I live it fully.</string>-->
+<!--    <string name="affirmation20_description">Love and positive energy surround me, filling my life with warmth.</string>-->
+<!--    <string name="affirmation21_description">I trust the journey of life, and everything unfolds for a reason.</string>-->
+<!--    <string name="affirmation22_description">I am in a constant state of growth and improvement.</string>-->
+<!--    <string name="affirmation23_description">My positivity inspires others to live their best lives.</string>-->
+<!--    <string name="affirmation24_description">I release negativity and welcome peace and harmony into my life.</string>-->
+<!--    <string name="affirmation25_description">Success and good fortune are drawn to me like a magnet.</string>-->
+<!--    <string name="affirmation26_description">I have the capability to achieve my goals and dreams.</string>-->
+<!--    <string name="affirmation27_description">Confidence, competence, and capability define my essence.</string>-->
+<!--    <string name="affirmation28_description">I radiate confidence, self-respect, and inner harmony.</string>-->
+<!--    <string name="affirmation29_description">I am a powerhouse, unbreakable and filled with limitless potential.</string>-->
+<!--    <string name="affirmation30_description">I am at peace with my past, present, and future, embracing every moment.</string>-->
+
+</resources>
