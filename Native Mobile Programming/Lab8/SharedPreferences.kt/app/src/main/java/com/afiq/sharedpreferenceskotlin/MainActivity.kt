@@ -1,5 +1,7 @@
-package com.afiq.sharedpreferenceskotlin
 
+//author : afiq hanif
+
+package com.afiq.sharedpreferenceskotlin
 import android.graphics.Paint.Align
 import android.os.Bundle
 import android.os.Parcel
