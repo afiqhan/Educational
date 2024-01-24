@@ -1,6 +1,6 @@
+//author:afiq han (S62993)
+
 package com.afiq.sharedpreferences;
-
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;

@@ -1,8 +1,8 @@
-package com.afiq.sharedpreferences;
+//author : afiq hanif (S62993)
 
+package com.afiq.sharedpreferences;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
