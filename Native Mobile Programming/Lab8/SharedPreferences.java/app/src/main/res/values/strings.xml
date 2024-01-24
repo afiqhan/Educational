@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Shared Preferences</string>
+    <string name="hint_username">Enter Username</string>
+    <string name="hint_password">Enter password</string>
+    <string name="login">Login</string>
+    <string name="sign_up">Sign up</string>
+    <string name="logout">Logout</string>
+
+</resources>
