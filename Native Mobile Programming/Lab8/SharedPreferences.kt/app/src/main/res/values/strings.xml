@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Shared preferences kotlin</string>
+    <string name="user_instructions">To Save User Credentials in SharedPreferences you need to Sign up first. Next login with the Credentials provided in signup.</string>
+</resources>
