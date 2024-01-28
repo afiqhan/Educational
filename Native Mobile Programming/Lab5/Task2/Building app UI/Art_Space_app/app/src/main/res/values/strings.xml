@@ -1,0 +1,21 @@
+<resources>
+    <string name="app_name">Art Space app</string>
+    <string name="ArtworkTitle1">Sun set is always the best</string>
+    <string name="ArtworkTitle2">Sailing is relaxing 😙</string>
+    <string name="ArtworkTitle3">Nearly Maghrib prayer</string>
+    <string name="ArtworkTitle4">Pathway to heaven</string>
+    <string name="ArtworkTitle5">Night life under NY city Bridge</string>
+    <string name="ArtworkTitle6">The abandoned island Kasanaki in Japan</string>
+    <string name="Author1">Omar Alomory</string>
+    <string name="Author2">Gary Lim</string>
+    <string name="Author3">Moaz Zanil</string>
+    <string name="Author4">Nazmos Sun</string>
+    <string name="Author5">Maziah Adnan</string>
+    <string name="Author6">Luqman the kid</string>
+    <string name="Year1">2000</string>
+    <string name="Year2">2004</string>
+    <string name="Year3">2008</string>
+    <string name="Year4">2023</string>
+    <string name="Year5">1157</string>
+    <string name="Year6">2016</string>
+</resources>
